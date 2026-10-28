@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="col-md-6 offset-md-3 text-center">
+    {% if user.is_authenticated %}
+        <h1>Welcome!</h1>
+    {% else %}
     <h1>Login</h1>
     <form method="POST" action="">
         {% csrf_token %}
@@ -14,5 +17,6 @@
         </div>
         <button type="submit" class="btn btn-primary w-100">Login</button>
     </form>
+    {% endif %}
 </div>
 {% endblock %}
