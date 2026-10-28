@@ -9,8 +9,8 @@ class SignUpForm(UserCreationForm):
     
     class Meta:
         model = User
-        # Removed the password fields. UserCreationForm handles them automatically.
-        fields = ('username', 'first_name', 'last_name', 'email', 'password', 'confirm_password')
+        # We only list the fields we added. Django handles password1 and password2 automatically.
+        fields = ('username', 'first_name', 'last_name', 'email')
         
     def __init__(self, *args, **kwargs):
         super(SignUpForm, self).__init__(*args, **kwargs)
@@ -20,12 +20,14 @@ class SignUpForm(UserCreationForm):
         self.fields['username'].label = ''
         self.fields['username'].help_text = '<span class="form-text text-muted"><small>Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</small></span>'
 
-        self.fields['password'].widget.attrs['class'] = 'form-control'
-        self.fields['password'].widget.attrs['placeholder'] = 'Password'
-        self.fields['password'].label = ''
-        self.fields['password'].help_text = '<ul class="form-text text-muted small"><li>Your password can\'t be too similar to your other personal information.</li><li>Your password must contain at least 8 characters.</li><li>Your password can\'t be a commonly used password.</li><li>Your password can\'t be entirely numeric.</li></ul>'
+        # Django's internal name is password1, but the user sees "Password"
+        self.fields['password1'].widget.attrs['class'] = 'form-control'
+        self.fields['password1'].widget.attrs['placeholder'] = 'Password'
+        self.fields['password1'].label = ''
+        self.fields['password1'].help_text = '<ul class="form-text text-muted small"><li>Your password can\'t be too similar to your other personal information.</li><li>Your password must contain at least 8 characters.</li><li>Your password can\'t be a commonly used password.</li><li>Your password can\'t be entirely numeric.</li></ul>'
 
-        self.fields['confirm_password'].widget.attrs['class'] = 'form-control'
-        self.fields['confirm_password'].widget.attrs['placeholder'] = 'Confirm Password'
-        self.fields['confirm_password'].label = ''
-        self.fields['confirm_password'].help_text = '<span class="form-text text-muted"><small>Enter the same password as before, for verification.</small></span>'
+        # Django's internal name is password2, but the user sees "Confirm Password"
+        self.fields['password2'].widget.attrs['class'] = 'form-control'
+        self.fields['password2'].widget.attrs['placeholder'] = 'Confirm Password'
+        self.fields['password2'].label = ''
+        self.fields['password2'].help_text = '<span class="form-text text-muted"><small>Enter the same password as before, for verification.</small></span>'
