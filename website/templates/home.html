@@ -5,7 +5,7 @@
         <h1>Welcome!</h1>
     {% else %}
     <h1>Login</h1>
-    <form method="POST" action="">
+    <form method="POST" action="{% url 'home' %}">
         {% csrf_token %}
         <div class="mb-3 text-start">
             <label for="username" class="form-label">Username</label>
