@@ -77,12 +77,12 @@ def add_record(request):
                 add_record = form.save()
                 messages.success(request, "Record Added Successfully!")
                 return redirect('home')
-        else:
-            return render(request, 'add_record.html', {'form': form})
+        
+        return render(request, 'add_record.html', {'form': form})
     else:
         messages.success(request, "You Must Be Logged In To Add Record!")
         return redirect('home')
-    
+
     
 def update_record(request, pk):
     if request.user.is_authenticated:
